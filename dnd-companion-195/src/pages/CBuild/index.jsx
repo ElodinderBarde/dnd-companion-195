@@ -1,0 +1,138 @@
+import { useState, useEffect } from "react";
+import { getClasses } from "../../services/characterAPI";
+import SpellPicker from "../../components/SpellPicker";
+
+export default function CharacterBuilder() {
+  const [name, setName] = useState("Hero");
+  const [charClass, setCharClass] = useState("");
+  const [characterLevel, setCharacterLevel] = useState(1);
+  const [classes, setClasses] = useState([]);
+  const [selectedSpells, setSelectedSpells] = useState([]);
+
+  useEffect(() => {
+    getClasses().then(setClasses);
+  }, []);
+
+// Spells hinzufügen
+  const handleAddSpell = (spell) => {
+    if (selectedSpells.length >= 5) {
+      alert("Du kannst maximal 5 Zauber auswählen.");
+      return;
+    }
+  
+    if (!selectedSpells.some(s => s.index === spell.index)) {
+      setSelectedSpells([...selectedSpells, spell]);
+    }
+  };
+  
+  
+  
+  
+
+ const handleChoose =() => {
+  navigate("/charChooe");
+  return; 
+ }
+  
+  
+  //Charakter speichern (local)
+ const handleSubmit = (e) => {
+  e.preventDefault();
+  const noSpellClasses = ["Fighter", "Monk", "Barbarian", "Rogue"];
+
+  if (
+    !charClass ||
+    !characterLevel ||
+    (!noSpellClasses.includes(charClass) && selectedSpells.length === 0)
+  ) {
+    alert("Bitte wähle Klasse, Level und mindestens einen Zauber.");
+    return;
+  }
+  const newCharacter = {
+    name,
+    class: charClass,
+    characterLevel,
+    spells: selectedSpells.map(spell => ({
+      index: spell.index,
+      name: spell.name,
+      level: spell.level
+    }))
+  };
+
+  // Prüfe, ob ein Charakter mit demselben Namen bereits existiert
+  const existing = localStorage.getItem(`char_${name}`);
+  if (existing) {
+    alert("Ein Charakter mit diesem Namen existiert bereits.");
+    return;
+  }
+
+  // Speichere neuen Charakter
+const saved = JSON.parse(localStorage.getItem("dndCharacters")) || [];
+saved.push(newCharacter);
+localStorage.setItem("dndCharacters", JSON.stringify(saved));
+
+};
+
+  
+  //Spells Array zurücksetzen
+  const handleResetSpells = () => {
+    setSelectedSpells([]);
+  };
+  
+
+
+  //UI Page
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2>Charakter erstellen</h2>
+      <button type="button" value={"play"}onClick={handleChoose}>
+  
+</button>
+
+      <label>Name:
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+      </label>
+
+      <label>Klasse:
+        <select value={charClass} onChange={(e) => {setCharClass(e.target.value);handleResetSpells();}} required>
+          <option value="">-- Wähle eine Klasse --</option>
+          {classes.map((c) => (
+            <option key={c.index} value={c.name}>{c.name}</option>
+          ))}
+        </select>
+      </label>
+
+
+      <label>Level:
+        <input type="number" min="1" max="20" value={characterLevel} onChange={(e) => {setCharacterLevel(Number(e.target.value));handleResetSpells();}} required />
+      </label>
+
+      <button type="submit">save character </button>
+      <h4>Gewählte Zauber ({selectedSpells.length}/5):</h4>
+      
+      <button type="button" onClick={handleResetSpells}> reset spells</button>
+
+      {charClass && (
+        <SpellPicker
+  classIndex={charClass.toLowerCase()}
+  characterLevel={characterLevel}
+  onSelect={handleAddSpell}
+/>
+)}
+
+    </form>
+  
+);
+
+{selectedSpells.length > 0 && (
+    <div>
+      <h3>Gewählte Zauber:</h3>
+      <ul>
+        {selectedSpells.map(spell => (
+          <li key={spell.index}>{spell.name} (Stufe {spell.level})</li>
+        ))}
+      </ul>
+    </div>
+  )}
+  
+}
