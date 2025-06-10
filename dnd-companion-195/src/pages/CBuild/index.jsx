@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getClasses } from "../../services/characterAPI";
 import SpellPicker from "../../components/SpellPicker";
+import { useNavigate } from "react-router-dom";
 
 export default function CharacterBuilder() {
   const [name, setName] = useState("Hero");
@@ -12,6 +13,13 @@ export default function CharacterBuilder() {
   useEffect(() => {
     getClasses().then(setClasses);
   }, []);
+
+
+
+
+
+
+  
 
 // Spells hinzufügen
   const handleAddSpell = (spell) => {
@@ -78,16 +86,26 @@ localStorage.setItem("dndCharacters", JSON.stringify(saved));
   const handleResetSpells = () => {
     setSelectedSpells([]);
   };
-  
 
+
+  const navigate = useNavigate();
 
   //UI Page
   return (
+
+
+
+    
     <form onSubmit={handleSubmit}>
+
+
+
+              <button type="button" onClick={() => navigate("/")}>
+          Play
+        </button>
+
       <h2>Charakter erstellen</h2>
-      <button type="button" value={"play"}onClick={handleChoose}>
-  
-</button>
+
 
       <label>Name:
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
