@@ -9,6 +9,7 @@ export default function CompanionPage() {
   const { name } = useParams();
   const [character, setCharacter] = useState(null);
   const [selectedSpell, setSelectedSpell] = useState(null);
+  const [characterLevel, setCharacterLevel] = useState(null);
 
 
 
@@ -40,6 +41,14 @@ useEffect(() => {
 }, [name]);
 
 
+useEffect(() => {
+  const allChars = JSON.parse(localStorage.getItem("dndCharacters")) || [];
+  const found = allChars.find((c) => c.name.toLowerCase() === name.toLowerCase());
+  if (found) {
+    setCharacter(found);
+    setCharacterLevel(found.characterLevel); // Setze Level separat
+  }
+}, [name]);
 
 
 const handleNoteChange = (e) => {
@@ -47,6 +56,18 @@ const handleNoteChange = (e) => {
   setNotes(newNote);
   localStorage.setItem(`notes${name}`, newNote);
 };
+
+
+const updateCharacterLevel = (newLevel) => {
+  const allChars = JSON.parse(localStorage.getItem("dndCharacters")) || [];
+  const updatedChars = allChars.map(c =>
+    c.name.toLowerCase() === name.toLowerCase()
+      ? { ...c, characterLevel: newLevel }
+      : c
+  );
+  localStorage.setItem("dndCharacters", JSON.stringify(updatedChars));
+};
+
 
 
   if (!character) return <p>Charakter nicht gefunden...</p>;
@@ -104,6 +125,38 @@ const handleNoteChange = (e) => {
 
 
 
+<h4>Level:</h4>
+<div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
+  <button
+    type="button"
+    onClick={() => {
+      if (characterLevel > 1) {
+        const newLevel = characterLevel - 1;
+        setCharacterLevel(newLevel);
+        updateCharacterLevel(newLevel);
+        character.characterLevel = newLevel;
+      }
+    }}
+  >
+    −
+  </button>
+
+  <span style={{ minWidth: "2rem", textAlign: "center" }}>{characterLevel}</span>
+
+  <button
+    type="button"
+    onClick={() => {
+      if (characterLevel < 20) {
+        const newLevel = characterLevel + 1;
+        setCharacterLevel(newLevel);
+        updateCharacterLevel(newLevel);
+        character.characterLevel = newLevel;
+      }
+    }}
+  >
+    +
+  </button>
+</div>
 
     </div>
   );  
