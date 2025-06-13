@@ -1,138 +1,99 @@
-### ** Projekttitel und Kurzbeschreibung**
+# DnD Companion App
 
-> DnD Companion App_  
-> **Kurzbeschreibung**:  
-> Eine Webanwendung zur Erstellung, Verwaltung und Darstellung von Charakteren aus „Dungeons & Dragons“. Spieler können Charaktere inklusive Klasse, Level und Zaubern erstellen. Zudem können Notizen verwaltet werden, und eine Detailansicht bietet Zauberbeschreibungen.
+Eine einfache und benutzerfreundliche Webanwendung zur Verwaltung von Dungeons & Dragons-Charakteren. Erstelle Helden mit Klasse, Level und Zaubern, speichere sie lokal und greife im Spiel auf ihre Notizen und Zauberinformationen zu.
 
 ---
 
-### ** Ziel des Projekts**
+##  Features
 
-> Das Ziel dieser Anwendung ist es, DnD-Spielerinnen und -Spielern ein praktisches Werkzeug an die Hand zu geben, mit dem sie ihre Charaktere verwalten und im Spielverlauf schnell auf Zauber und individuelle Notizen zugreifen können.
-> Zudem legt dies den ersten Baustein dafür, die Spielerseitige Kommunikation zwischen ihm und dem Spielleiter zu ermöglichen. 
+-  **Charaktererstellung**  
+  - Name, Klasse, Level  
+  - Zauberauswahl (dynamisch je nach Klasse/Level)  
+  - Zauberbeschreibung auf der Detailseite
 
+-  **Notizen pro Charakter**  
+  - Editierbar, lokal gespeichert  
+  - Automatisch beim Tippen gespeichert
 
----
+-  **Lokale Speicherung**  
+  - Alle Daten werden im `localStorage` des Browsers gespeichert  
+  - Kein Backend erforderlich
 
-### ** Technologiestack**
-
-- **Frontend:** React (Vite + React Router)
-    
-- **Speicherung:** `localStorage` des Browsers
-    
-- **Backend/API:** externe API für Zauberdaten (`https://www.dnd5eapi.co`)
-    
-- **Sprachen:** JavaScript, HTML, CSS (optional am Ende)
-    
-- **Bibliotheken:** ggf. `@3d-dice/dice-box` für Würfelfunktion (experimentell)
-    
+-  **D&D 5e API-Anbindung**  
+  - Zauberdaten werden direkt von [dnd5eapi.co](https://www.dnd5eapi.co) geladen
 
 ---
 
-### **Funktionsübersicht**
+## Technologiestack
 
-- **Charakter erstellen:**
-    
-    - Eingabe von Name, Klasse, Level
-        
-    - Auswahl bis zu 5 Zaubern (nur bei Magiefähigen Klassen)
-	
-	- Zauber sind nach Level sortiert
-
-- **Charakter speichern:**
-    
-    - Speicherung erfolgt lokal im `localStorage`
-        
-    - Überprüfung auf doppelte Namen
-        
-- **Charakter laden:**
-    
-    - Auswahl eines bestehenden Charakters auf der Startseite
-        
-- **Detailansicht (CompanionPage):**
-    
-    - Anzeige aller Basisdaten
-        
-    - Zauberliste mit einblendbaren Beschreibungen
-        
-    - Notizfeld (lokal gespeichert und an Namen gebunden)
-    
-    
-    
+| Ebene       | Technologie                   |
+|-------------|-------------------------------|
+| Frontend    | React (mit Vite)              |
+| Routing     | React Router DOM              |
+| Daten       | `localStorage` (browserbasiert) |
+| API         | https://www.dnd5eapi.co       |
+| Optional    | `@3d-dice/dice-box` (experimentell) |
+| Sprache     | JavaScript, HTML, CSS         |
 
 ---
 
-### **Benutzeroberfläche (UI-Konzept)**
+##  Lokales Setup
 
-> Die Oberfläche ist in mehrere Seiten unterteilt:
+1.  Abhängigkeiten installieren:
 
-- **Startseite:** Charakterauswahl
-    
-- **Charaktererstellung:** Eingabe und Zauberauswahl
-    
-- **Charakteransicht:** Übersicht mit Zaubern und Notizfeld
-    
+```bash
+npm install
+```
 
-Ein einfaches, auf Klarheit ausgelegtes Layout. CSS wird bei Bedarf am Ende ergänzt.
 
----
 
-### ** Besonderheiten / Herausforderungen**
+ Projekt starten:
 
-- **Doppelte Namen verhindern:** eigenes Namensregister mit Prüfung
-    
-- **Zauberlogik nach Klasse und Level:** dynamisch durch API-Daten
-    
-- **Offlinefähig:** Alles funktioniert ohne Backend durch `localStorage`
-    
-- **Fehlermeldungen und Zustandsprüfung:** einfache Alerts
-    
+```bash
+npm run dev
+```
 
----
+App im Browser öffnen:
+http://localhost:5173
 
-### ** Tests / Validierung**
 
-- Manuelle Tests der wichtigsten Anwendungsfälle:
-    
-    - Erstellen und Speichern eines Charakters
-        
-    - Laden eines bestehenden Charakters
-        
-    - Anzeigen und Ausblenden von Zauberbeschreibungen
-        
-    - Speicherung und Laden der Notizen
-        
 
----
+### Projektstruktur
 
-### ** Reflexion & Ausblick**
+```Text
+dnd-companion-app/
+├── src/
+│   ├── components/           # Wiederverwendbare UI-Komponenten
+│   ├── pages/                # Hauptseiten (Builder, Companion etc.)
+│   ├── services/             # API-Zugriffe (z.B. Zauber laden)
+│   ├── App.jsx               # Routing und Hauptlayout
+│   └── main.jsx              # Einstiegspunkt
+├── public/
+│   └── ...
+├── package.json
+└── README.md
 
-> **Was gut lief:**
 
-- Dynamisches Zusammenspiel von Klasse & Zaubern
-    
-- Lokale Datenspeicherung ohne Backend
-    
-- Intuitive Komponententrennung
-    
+```
 
-> **Was verbessert werden könnte:**
+### Persönliche Lernziele
+Dieses Projekt wurde als Teil des Moduls 294 realisiert.
 
-- Styling (CSS fehlt teils noch)
-    
-- Zauber nachträglich bearbeiten / löschen
-    
-- Würfelkomponente final integrieren
-    
+Die Unterstützung durch ChatGPT erfolgte bei:
+- Fehlersuche & Syntaxkorrekturen
 
-> **Mögliche Erweiterungen:**
+- Verbesserungsvorschlägen zur Struktur
 
-- Export/Import von Charakteren
-    
-- Cloudspeicherung (Firebase etc.)
-    
-- Mehrsprachigkeit
-    
-- Kampagnenverwaltung / Party-Modus
-    
+- Ideenfindung zur Feature-Erweiterung
+
+Prompts waren stets zielgerichtet und fokussiert:
+
+„Was mache ich falsch?“, „Wie geht das besser?“, „Was fehlt hier?“
+
+
+
+
+Lizenz
+Dieses Projekt dient Lernzwecken.
+Wenn du es weiterverwenden oder erweitern möchtest, verlinke bitte das Original-Repo oder nenne die Quelle.
 
