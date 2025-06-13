@@ -34,7 +34,7 @@
 
 ### Komponenten- und Strukturdiagramm
 
-
+```Text
 dnd-companion-app/
 ├── src/
 │   ├── components/         # Wiederverwendbare UI-Komponenten (z. B. SpellPicker)
@@ -45,7 +45,7 @@ dnd-companion-app/
 ├── public/                 # Statische Ressourcen (evtl. Würfel-Assets)
 ├── package.json            # Projekt-Konfiguration
 └── README.md               # Diese Dokumentation
-
+```
 
 
 ---
@@ -187,6 +187,9 @@ Das Verhalten bei falschen Eingaben (z. B. doppelte Namen) wurde gezielt getes
 
  DEV  v3.2.3 C:/Users/rmarc/Desktop/Projekte/js/dnd-companion/dnd-companion-195
 
+
+
+```Text
  ✓ src/__tests__/SpellPicker.test.jsx (5 tests) 121ms
    ✓ SpellPicker Komponente > lädt und zeigt Zauber an 38ms
    ✓ SpellPicker Komponente > zeigt Details nach Klick auf Zauber 65ms
@@ -194,7 +197,7 @@ Das Verhalten bei falschen Eingaben (z. B. doppelte Namen) wurde gezielt getes
    ✓ SpellPicker Komponente > ruft onSelect auf, wenn Zauber übernommen wird 13ms
    ✓ SpellPicker Komponente > zeigt keine Liste, wenn classIndex oder Level fehlen 2ms
 
-
+````
 
 
 
