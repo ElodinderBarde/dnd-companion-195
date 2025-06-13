@@ -8,10 +8,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/characterBuild" element={<CharacterBuilder />} />
-        <Route path ="/" element={<CharChoose />} />
+        <Route path ="/*" element={<CharChoose />} />
         <Route path="/companion/:name" element={<Companion />} />
 
-        {/* Weitere Seiten folgen */}
+        
       </Routes>
     </Router>
   );

@@ -10,16 +10,12 @@ export default function CharacterBuilder() {
   const [classes, setClasses] = useState([]);
   const [selectedSpells, setSelectedSpells] = useState([]);
 
-  useEffect(() => {
-    getClasses().then(setClasses);
-  }, []);
-
-
-
-
 
 
   
+  useEffect(() => {
+    getClasses().then(setClasses);
+  }, []);
 
 // Spells hinzufügen
   const handleAddSpell = (spell) => {
