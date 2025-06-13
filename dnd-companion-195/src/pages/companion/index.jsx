@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getSpellDetail } from "../../services/characterAPI"; 
 import { useNavigate } from "react-router-dom";
-
+import './companion.css'; // Importiere die CSS-Datei für das Styling
 
 
 export default function CompanionPage() {
@@ -80,84 +80,49 @@ const updateCharacterLevel = (newLevel) => {
 
   return (
     
-    <div>
-
-              <button type="button" onClick={() => navigate("/")}>
-          Change Character
+    <div className="companion-container">
+  {/* Linke Spalte */}
+  <div className="companion-left">
+    <button type="button" onClick={() => navigate("/")}>
+      Change Character
+    </button>
+    <h2>Charakter: {character.name}</h2>
+    <p>Klasse: {character.class}</p>
+    <p>Level: {character.characterLevel}</p>
+    
+    <h4>Zauber:</h4>
+    <ul>
+      {character.spells?.map((spell) => (
+        <li key={spell.index}>
+          <button onClick={() => handleSpellClick(spell)}>
+            {spell.name} (Level {spell.level})
           </button>
+        </li>
+      ))}
+    </ul>
 
+    {selectedSpell && (
+      <div className="spell-details">
+        <h4>{selectedSpell.name}</h4>
+        <p><strong>Level:</strong> {selectedSpell.level}</p>
+        <p><strong>Reichweite:</strong> {selectedSpell.range}</p>
+        <p><strong>Dauer:</strong> {selectedSpell.duration}</p>
+        <p><strong>Beschreibung:</strong> {selectedSpell.desc?.join(" ")}</p>
+      </div>
+    )}
+  </div>
 
-      <h2>Charakter: {character.name}</h2>
-      <p>Klasse: {character.class}</p>
-      <p>Level: {character.characterLevel}</p>
-
-      <h4>Zauber:</h4>
-      <ul>
-        {character.spells?.map(spell => (
-          <li key={spell.index}>
-            <button onClick={() => handleSpellClick(spell)}>
-              {spell.name} (Level {spell.level})
-            </button>
-          </li>
-        ))}
-      </ul>
-
-      {selectedSpell && (
-        <div style={{ border: "1px solid gray", padding: "1rem", marginTop: "1rem" }}>
-          <h4>{selectedSpell.name}</h4>
-          <p><strong>Level:</strong> {selectedSpell.level}</p>
-          <p><strong>Reichweite:</strong> {selectedSpell.range}</p>
-          <p><strong>Dauer:</strong> {selectedSpell.duration}</p>
-          <p><strong>Beschreibung:</strong> {selectedSpell.desc?.join(" ")}</p>
-        </div>
-      )}
-
-
-
-      <h4>Notizen zu {character.name}:</h4>
-<textarea
-  value={notes}
-  onChange={handleNoteChange}
-  placeholder="Schreibe hier deine Notizen zum Charakter..."
-  style={{ width: "100%", height: "120px", marginTop: "0.5rem", padding: "0.5rem" }}
-/>
-
-
-
-
-<h4>Level:</h4>
-<div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
-  <button
-    type="button"
-    onClick={() => {
-      if (characterLevel > 1) {
-        const newLevel = characterLevel - 1;
-        setCharacterLevel(newLevel);
-        updateCharacterLevel(newLevel);
-        character.characterLevel = newLevel;
-      }
-    }}
-  >
-    −
-  </button>
-
-  <span style={{ minWidth: "2rem", textAlign: "center" }}>{characterLevel}</span>
-
-  <button
-    type="button"
-    onClick={() => {
-      if (characterLevel < 20) {
-        const newLevel = characterLevel + 1;
-        setCharacterLevel(newLevel);
-        updateCharacterLevel(newLevel);
-        character.characterLevel = newLevel;
-      }
-    }}
-  >
-    +
-  </button>
+  {/* Rechte Spalte */}
+  <div className="companion-right">
+    <h4>Notizen zu {character.name}:</h4>
+    <textarea
+      value={notes}
+      onChange={handleNoteChange}
+      placeholder="Schreibe hier deine Notizen zum Charakter..."
+      className="notes-field"
+    />
+  </div>
 </div>
 
-    </div>
   );  
 }

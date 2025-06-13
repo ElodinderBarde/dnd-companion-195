@@ -67,17 +67,19 @@ export default function CharacterBuilder() {
     }))
   };
 
-  // Prüfe, ob ein Charakter mit demselben Namen bereits existiert
-  const existing = localStorage.getItem(`char_${name}`);
-  if (existing) {
-    alert("Ein Charakter mit diesem Namen existiert bereits.");
-    return;
-  }
 
-  // Speichere neuen Charakter
+
 const saved = JSON.parse(localStorage.getItem("dndCharacters")) || [];
+const existing = saved.find(c => c.name.toLowerCase() === name.toLowerCase());
+
+if (existing) {
+  alert("Ein Charakter mit diesem Namen existiert bereits.");
+  return;
+}
 saved.push(newCharacter);
 localStorage.setItem("dndCharacters", JSON.stringify(saved));
+alert("Charakter erfolgreich gespeichert!");
+
 
 };
 
