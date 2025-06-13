@@ -152,7 +152,7 @@ Als Spieler möchte ich Notizen zu meinem Charakter speichern, um wichtige Infor
 ### Testplan
 
 | Testfall                     | Eingabe                | Erwartetes Ergebnis                 | Erhaltenes Ergebnis |
-	|-----------------------------|------------------------|-------------------------------------|--------------------| 
+|-----------------------------|------------------------|-------------------------------------|--------------------| 
 | 1. Charakter erstellen      | Name+Klasse+Level      | Wird gespeichert                    | Wurde gespeichert |
 | 2. Zauber anzeigen          | Klick auf Zauber       | Beschreibung wird eingeblendet      | Feld erscheint und Beschreibung wird eingeblendet|
 | 3. Notiz schreiben          | Text in Textarea       | Bleibt gespeichert bei Reload       | Auch beim wechseln zwiscchen Charakteren bleiben Notizen vorhanden|
@@ -182,6 +182,9 @@ Das Verhalten bei falschen Eingaben (z. B. doppelte Namen) wurde gezielt getes
 |3. Kein Anzeigen bei zu niedrigem Level: Hat der Charakter ein zu niedriges Level für alle verfügbaren Zauber, bleibt die Zauberliste leer.| zeigt keine Zauber, wenn Level zu niedrig| 
 |4. onSelect wird korrekt ausgelöst: Wird ein Zauber übernommen, wird die übergebene onSelect-Funktion mit dem korrekten Zauber aufgerufen.| ruft onSelect auf, wenn Zauber übernommen wird|
 |5. Komponente bleibt leer bei fehlenden Props: Sind classIndex oder characterLevel nicht gesetzt, rendert die Komponente keine Zauberliste.| zeigt keine Liste, wenn classIndex oder Level fehlen|
+
+
+
 
  #### Im Detail aus der Konsole:
 
