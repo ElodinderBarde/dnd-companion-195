@@ -32,7 +32,6 @@ Eine einfache und benutzerfreundliche Webanwendung zur Verwaltung von Dungeons &
 | Routing     | React Router DOM              |
 | Daten       | `localStorage` (browserbasiert) |
 | API         | https://www.dnd5eapi.co       |
-| Optional    | `@3d-dice/dice-box` (experimentell) |
 | Sprache     | JavaScript, HTML, CSS         |
 
 ---
@@ -76,21 +75,7 @@ dnd-companion-app/
 
 ```
 
-### Persönliche Lernziele
 Dieses Projekt wurde als Teil des Moduls 294 realisiert.
-
-Die Unterstützung durch ChatGPT erfolgte bei:
-- Fehlersuche & Syntaxkorrekturen
-
-- Verbesserungsvorschlägen zur Struktur
-
-- Ideenfindung zur Feature-Erweiterung
-
-Prompts waren stets zielgerichtet und fokussiert:
-
-„Was mache ich falsch?“, „Wie geht das besser?“, „Was fehlt hier?“
-
-
 
 
 Lizenz
