@@ -26,6 +26,7 @@ export default function CharacterBuilder() {
   
     if (!selectedSpells.some(s => s.index === spell.index)) {
       setSelectedSpells([...selectedSpells, spell]);
+
     }
   };
   
