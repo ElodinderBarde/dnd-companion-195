@@ -254,7 +254,8 @@ Das Verhalten bei falschen Eingaben (z. B. doppelte Namen) wurde gezielt getes
 
    
 
-Allgemein war es ein Interessantes Projekt, welches nicht übermässig ausgearbeitet ist. 
+### Hilfestellungen
+
 Leider muss ich zugeben,  dass ich nicht ohne die Hilfe von ChatGPT auskam, versuchte jedoch meine Prompts wie folgt zu formulieren: 
 
 - Was mache ich hier falsch?
@@ -269,6 +270,12 @@ Ganz direkt, wofür wurde GPT verwendet?
 - Alternative Vorgehensweisen 
 - Ideensuche
 
+
+Repositories zu M294 von JohnnyKrup
+Als Code-Vorlagen und zur Inspiration für die Struktur des Projekts
+
+SideQuests M294
+Als Nachschlagewerk für Installationen und Umsetzungen
 
 #### Was würde ich das nächste Mal anders machen? 
 
