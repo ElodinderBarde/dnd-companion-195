@@ -13,6 +13,40 @@
 
 
 ---
+### Storyboard
+#### Empfang
+
+So könnte der Empfang aussehen. 
+hier könnte der User seine erstellen Character sehen, hinzufügen und löschen
+![CharChoose](https://github.com/user-attachments/assets/39a7338b-39a3-45b6-a929-1029475c8f98)
+
+
+#### Charakter erstellen
+
+Hier könnte der User seinen Charakter erstellen. 
+es soll die erlernbaren Zauber darstellen und die Charaktererstellung so einfach wie möglich halten
+
+![CBuild](https://github.com/user-attachments/assets/93115f21-8eca-494a-bf71-973e67a33c9c)
+
+#### Companion
+
+Hier soll der User die meiste Zeit verbringen. 
+Es soll einen überblick über den gewählten Charakter schaffen und die niederschreibung von Notizen ermöglichen 
+
+![Companion](https://github.com/user-attachments/assets/e7c30dcc-59ac-4417-8081-3e2eebce893c)
+
+### Die Umsetzung
+#### CharChoose
+![image](https://github.com/user-attachments/assets/b7e1b015-b92b-4fc0-90e7-92930b66f341)
+
+#### CBuild
+![image](https://github.com/user-attachments/assets/5b367212-116a-4001-9d4d-3e0cdd3431fa)
+
+#### Companion
+![image](https://github.com/user-attachments/assets/2b42ed1b-b0c6-448f-87d8-5c8089b28ada)
+![image](https://github.com/user-attachments/assets/7c739f9b-a999-4f4a-af43-3c657840310a)
+
+---
 
 ### Technologiestack
 
@@ -28,8 +62,70 @@
 
 
 ---
+### dnd5api
 
 
+Im Mittelpunkt meiner Applikation stehen die exteren Daten der dnd5api. Diese umfasssende Sammlung von Daten ermöglicht mir, die Zauber und Klassen zu erhalten und bietet auch eine wunderbare Sammlung von Völker, Gegenstände und Monster. die erlauben diese in Zukunft weiter auszubauen. 
+
+Der Datenstz erlaubt umfassende und Zielgerichtete Abfragen, durch die fülle. folgend ist ein Beispiel des Zaubers "Firebolt"
+
+```bash
+{
+  "higher_level": [],
+  "index": "fire-bolt",
+  "name": "Fire Bolt",
+  "desc": [
+    "You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried.",
+    "This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10)."
+  ],
+  "range": "120 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "ritual": false,
+  "duration": "Instantaneous",
+  "concentration": false,
+  "casting_time": "1 action",
+  "level": 0,
+  "attack_type": "ranged",
+  "damage": {
+    "damage_type": {
+      "index": "fire",
+      "name": "Fire",
+      "url": "/api/2014/damage-types/fire"
+    },
+    "damage_at_character_level": {
+      "1": "1d10",
+      "5": "2d10",
+      "11": "3d10",
+      "17": "4d10"
+    }
+  },
+  "school": {
+    "index": "evocation",
+    "name": "Evocation",
+    "url": "/api/2014/magic-schools/evocation"
+  },
+  "classes": [
+    {
+      "index": "sorcerer",
+      "name": "Sorcerer",
+      "url": "/api/2014/classes/sorcerer"
+    },
+    {
+      "index": "wizard",
+      "name": "Wizard",
+      "url": "/api/2014/classes/wizard"
+    }
+  ],
+  "subclasses": [],
+  "url": "/api/2014/spells/fire-bolt",
+  "updated_at": "2025-04-08T21:14:16.147Z"
+```
+
+
+---
 
 
 ### Komponenten- und Strukturdiagramm
@@ -202,7 +298,31 @@ Das Verhalten bei falschen Eingaben (z. B. doppelte Namen) wurde gezielt getes
 
 ````
 
+### Unit-Test beispiel
 
+```bahs
+scribe("SpellPicker Komponente", () => {
+  let dummyOnSelect;
+
+  beforeEach(() => {
+    dummyOnSelect = vi.fn();
+  });
+
+  it("lädt und zeigt Zauber an", async () => {
+    render(<SpellPicker classIndex="wizard" characterLevel={1} onSelect={dummyOnSelect} />);
+    expect(await screen.findByText("Fire Bolt")).toBeInTheDocument();
+    expect(screen.getByText("Magic Missile")).toBeInTheDocument();
+  });
+
+  it("zeigt Details nach Klick auf Zauber", async () => {
+    render(<SpellPicker classIndex="wizard" characterLevel={1} onSelect={dummyOnSelect} />);
+    const spellButton = await screen.findByRole("button", { name: "Magic Missile" });
+    fireEvent.click(spellButton);
+    expect(await screen.findByText(/Reichweite:/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Magic Missile" })).toBeInTheDocument();
+  });
+
+```
 
 ---
 
