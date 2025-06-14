@@ -38,7 +38,13 @@ Eine einfache und benutzerfreundliche Webanwendung zur Verwaltung von Dungeons &
 
 ##  Lokales Setup
 
-1.  Abhängigkeiten installieren:
+Projekt vorbereiten
+```bash
+cd dnd-companoin-195
+```
+
+
+ Abhängigkeiten installieren:
 
 ```bash
 npm install
